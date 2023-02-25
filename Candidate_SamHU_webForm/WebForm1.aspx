@@ -8,7 +8,15 @@
     <title></title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+   <style type="text/css">
+    .Hrline{ border:5px black solid;}
+    </style>
+
 </head>
+
+
+
 <body>
     <div class="container">
         <div class="row">
@@ -22,21 +30,28 @@
                             <label for="txtAGE" class="form-label">年齡:</label>
                             <input type="text" name="txtAGE" id="txtAGE" class="form-control" placeholder="請輸入年齡">&nbsp;
                              <label for="txtBday" class="form-label">生日:</label>
-                            <input type="text" id="datepicker" name="txtBday" class="form-control" validchars="1234567890/" placeholder="請輸入生日">&nbsp;
+                            <input type="text" id="datepicker" name="txtBday" class="form-control" validchars="1234567890/" placeholder="請輸入生日" autocomplete="OFF">&nbsp;
                         </div>
                         <div class="mb-3">
-                            <asp:Button ID="Button1" runat="server" class="btn btn-primary" Text="送出檔案" OnClick="btnShow_Click"/>
+                            <asp:Button ID="Button1" runat="server" class="btn btn-primary" Text="送出檔案" OnClick="btnShow_Click" />
                         </div>
                     </fieldset>
                 </form>
             </div>
 
             <div class="col-9 mt-3">
-
-                <asp:DataGrid ID="Gridview1" runat="server" CellPadding="4" CellSpacing="0" BorderStyle="Solid" BorderWidth="1">
+                <asp:GridView ID="GridView1" runat="server" ShowHeader="true" HeaderStyle-HorizontalAlign="Center"  cellpadding="10" cellspacing="5">
+                    <HeaderStyle BackColor="LightCyan"
+                        ForeColor="MediumBlue" />
                     <Columns>
+                        <asp:TemplateField HeaderText="Edit">
+                            <ItemTemplate>
+                                <asp:Button ID="Button1" runat="server" Text="修改" />
+                                <asp:Button ID="Button2" runat="server" Text="刪除" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
-                </asp:DataGrid>
+                </asp:GridView>
             </div>
 
         </div>
