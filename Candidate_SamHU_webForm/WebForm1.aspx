@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="Candidate_SamHU_webForm.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="Candidate_SamHU_webForm.WebForm1" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 
@@ -8,11 +8,6 @@
     <title></title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-   <style type="text/css">
-    .Hrline{ border:5px black solid;}
-    </style>
-
 </head>
 
 
@@ -40,16 +35,12 @@
             </div>
 
             <div class="col-9 mt-3">
-                <asp:GridView ID="GridView1" runat="server" ShowHeader="true"  HeaderStyle-HorizontalAlign ="Center"  cellpadding="10" cellspacing="5" >
-                    <HeaderStyle BackColor="LightCyan"
-                        ForeColor="MediumBlue" />
+
+                <asp:GridView ID="GridView1"  OnRowCommand="CustomersGridView_RowCommand" runat="server" howHeader="true"   HeaderStyle-HorizontalAlign ="Center"  cellpadding="10" cellspacing="5" >
+                     <headerstyle backcolor="LightCyan" forecolor="MediumBlue"/>
                     <Columns>
-                        <asp:TemplateField HeaderText="Edit">
-                            <ItemTemplate>
-                                <asp:Button ID="Button1" runat="server" Text="修改" CommandName="Edit" />
-                                <asp:Button ID="Button2" runat="server" Text="刪除" CommandName="DeleteRow"  CommandArgument="<%# ((GridViewRow)Container).RowIndex %>"  />
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                          <asp:ButtonField  buttontype="Button" commandname="Delete" Text="刪除" /> 
+                          <asp:buttonfield buttontype="Button" commandname="Select" text="Select"/>
                     </Columns>
                 </asp:GridView>
             </div>
