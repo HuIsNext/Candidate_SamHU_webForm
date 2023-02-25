@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-3 mt-3">
+            <div class="col-md-3 col-sm-12 mt-3">
                 <form id="form1" runat="server" method="post" action="WebForm1.aspx">
                     <fieldset>
                         <legend>基本資料輸入</legend>
@@ -34,20 +34,19 @@
                 </form>
             </div>
 
-            <div class="col-9 mt-3">
+            <div class="col-md-9 col-sm-12 mt-3">
 
-                <asp:GridView ID="GridView1"  OnRowCommand="CustomersGridView_RowCommand" runat="server" howHeader="true"   HeaderStyle-HorizontalAlign ="Center"  cellpadding="10" cellspacing="5" >
-                     <headerstyle backcolor="LightCyan" forecolor="MediumBlue"/>
+                <asp:GridView ID="GridView1" OnRowCommand="CustomersGridView_RowCommand" runat="server" howHeader="true" HeaderStyle-HorizontalAlign="Center" CellPadding="10" CellSpacing="5">
+                    <HeaderStyle BackColor="LightCyan" ForeColor="MediumBlue" />
                     <Columns>
-                          <asp:ButtonField  buttontype="Button" commandname="Delete" Text="刪除" /> 
-                          <asp:buttonfield buttontype="Button" commandname="Select" text="Select"/>
+                        <asp:ButtonField ButtonType="Button" CommandName="editItem" Text="編輯"/>
+                        <asp:ButtonField ButtonType="Button" CommandName="deleteItem" Text="刪除" />
                     </Columns>
                 </asp:GridView>
             </div>
 
         </div>
     </div>
-
 </body>
 
 
