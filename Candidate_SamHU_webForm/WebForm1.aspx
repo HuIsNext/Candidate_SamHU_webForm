@@ -40,14 +40,14 @@
             </div>
 
             <div class="col-9 mt-3">
-                <asp:GridView ID="GridView1" runat="server" ShowHeader="true" HeaderStyle-HorizontalAlign="Center"  cellpadding="10" cellspacing="5">
+                <asp:GridView ID="GridView1" runat="server" ShowHeader="true"  HeaderStyle-HorizontalAlign ="Center"  cellpadding="10" cellspacing="5" >
                     <HeaderStyle BackColor="LightCyan"
                         ForeColor="MediumBlue" />
                     <Columns>
                         <asp:TemplateField HeaderText="Edit">
                             <ItemTemplate>
-                                <asp:Button ID="Button1" runat="server" Text="修改" />
-                                <asp:Button ID="Button2" runat="server" Text="刪除" />
+                                <asp:Button ID="Button1" runat="server" Text="修改" CommandName="Edit" />
+                                <asp:Button ID="Button2" runat="server" Text="刪除" CommandName="DeleteRow"  CommandArgument="<%# ((GridViewRow)Container).RowIndex %>"  />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

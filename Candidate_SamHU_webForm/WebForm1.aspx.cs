@@ -46,6 +46,27 @@ namespace Candidate_SamHU_webForm
             ViewState["CurrentTable"] = DT;
         }
 
+        //protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //  if(e.CommandName.Equals("DeleteRow"))           
+        //   {
+        //   }
+        //}
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Del")
+            {
+                //取得 custid 的值
+                var custid = e.CommandArgument;
+                // ... 做後面要做的事情 .....
+            }
+        }
+        void ContactsGridView_RowCommand(Object sender, GridViewCommandEventArgs e)
+        {
+        }
+
+
         public override void VerifyRenderingInServerForm(Control control)
         {
             //'XX'型別 必須置於有 runat=server 的表單標記之中
