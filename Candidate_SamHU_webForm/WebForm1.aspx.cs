@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Web;
+using System.Drawing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
@@ -12,6 +9,7 @@ namespace Candidate_SamHU_webForm
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        int custid;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,7 +21,7 @@ namespace Candidate_SamHU_webForm
                 DataRow dr = DT.NewRow();
                 dr["姓名"] = "SaM";
                 dr["年齡"] = 18;
-                dr["生日"] = Convert.ToDateTime("02 /18/2023");
+                dr["生日"] = Convert.ToDateTime("02/18/2023");
                 DT.Rows.Add(dr);
                 GridView1.DataSource = DT;
                 GridView1.DataBind();
@@ -33,14 +31,36 @@ namespace Candidate_SamHU_webForm
         protected void btnShow_Click(object Sender, EventArgs e)
         {
             DataTable DT = (DataTable)ViewState["CurrentTable"];
-            DataRow dr = DT.NewRow();
-            dr["姓名"] = Context.Request.Form["txtName"].ToString();
-            dr["年齡"] = Convert.ToInt16(Context.Request.Form["txtAGE"].ToString());
-            dr["生日"] = Convert.ToDateTime(Request.Form["txtBday"].ToString());
-            DT.Rows.Add(dr);
-            GridView1.DataSource = DT;
-            GridView1.DataBind();
-            ViewState["CurrentTable"] = DT;
+            try
+            {
+                if (btnSend.Text == "送出檔案")
+                {
+                    DataRow dr = DT.NewRow();
+                    dr["姓名"] = txtName.Value.ToString();
+                    dr["年齡"] = txtAGE.Value.ToString();
+                    dr["生日"] = Convert.ToDateTime(datepicker.Value.ToString());
+
+                    DT.Rows.Add(dr);
+                    GridView1.DataSource = DT;
+                    GridView1.DataBind();
+                    ViewState["CurrentTable"] = DT;
+                }
+                else if (btnSend.Text == "修改帳號")
+                {
+                    custid = Convert.ToInt16(txtIndex.Text);
+                    DT.Rows[custid]["姓名"] = txtName.Value;
+                    DT.Rows[custid]["年齡"] = txtAGE.Value;
+                    DT.Rows[custid]["生日"] = Convert.ToDateTime(datepicker.Value.ToString());
+                    GridView1.DataSource = DT;
+                    GridView1.DataBind();
+                    ViewState["CurrentTable"] = DT;
+                    btnSend.Text = "送出檔案";
+                }
+            }
+            catch (Exception ex)
+            {
+              
+            }
         }
         public override void VerifyRenderingInServerForm(Control control)
         {
@@ -48,9 +68,8 @@ namespace Candidate_SamHU_webForm
         }
         protected void CustomersGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int custid = Convert.ToInt16(e.CommandArgument);
+            custid = Convert.ToInt16(e.CommandArgument);
             DataTable DT = (DataTable)ViewState["CurrentTable"];
-
             if (e.CommandName == "deleteItem")
             {
                 //取得 custid 的值
@@ -61,7 +80,11 @@ namespace Candidate_SamHU_webForm
             }
             else if (e.CommandName == "editItem")
             {
-               
+                btnSend.Text = "修改帳號";
+                txtIndex.Text = custid.ToString();
+                txtName.Value = DT.Rows[custid]["姓名"].ToString();
+                txtAGE.Value = DT.Rows[custid]["年齡"].ToString();
+                datepicker.Value = DT.Rows[custid]["生日"].ToString();
             }
         }
     }

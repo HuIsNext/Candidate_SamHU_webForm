@@ -20,15 +20,16 @@
                     <fieldset>
                         <legend>基本資料輸入</legend>
                         <div class="mb-3">
+                            <asp:textbox ID="txtIndex" runat="server" Visible="false"></asp:textbox>
                             <label for="txtName" class="form-label">姓名:</label>
-                            <input type="text" id="txtName" name="txtName" class="form-control" placeholder="請輸入名字">&nbsp;
+                            <input type="text" runat="server" id="txtName" name="txtName" class="form-control" placeholder="請輸入名字"/>&nbsp;
                             <label for="txtAGE" class="form-label">年齡:</label>
-                            <input type="text" name="txtAGE" id="txtAGE" class="form-control" placeholder="請輸入年齡">&nbsp;
-                             <label for="txtBday" class="form-label">生日:</label>
-                            <input type="text" id="datepicker" name="txtBday" class="form-control" validchars="1234567890/" placeholder="請輸入生日" autocomplete="OFF">&nbsp;
+                            <input type="text"  runat="server" name="txtAGE" id="txtAGE" class="form-control" placeholder="請輸入年齡"/>&nbsp;
+                            <label for="txtBday" class="form-label">生日:</label>
+                            <input type="text" runat="server" name="txtBday"  id="datepicker" class="form-control" validchars="1234567890/" placeholder="請輸入生日" autocomplete="off"/>&nbsp;
                         </div>
                         <div class="mb-3">
-                            <asp:Button ID="Button1" runat="server" class="btn btn-primary" Text="送出檔案" OnClick="btnShow_Click" />
+                            <asp:Button ID="btnSend" runat="server" class="btn btn-primary" Text="送出檔案" OnClick="btnShow_Click" />
                         </div>
                     </fieldset>
                 </form>
@@ -57,8 +58,15 @@
 
 <script>
     $(function () {
-        $("#datepicker").datepicker();
+       /*  $("#datepicker").datepicker();*/
+        /*知識點"UpdatePanel 與 jQuery的衝突"*/
+        /*When runat = server is added with a master page then it generate Default style id with master page..So to avoid it try ClientIDMode = "Static"*/
+        $("[id$=datepicker]").datepicker();
     });
+
+    function printHello() {
+        alert();
+    }
 </script>
 
 
